@@ -56,10 +56,11 @@ func (h Handler) Update(ctx fiber.Ctx) error {
 		return err
 	}
 	var body Meal
-	if err := ctx.Bind().Body(&meal); err != nil {
+	if err := ctx.Bind().Body(&body); err != nil {
 		return err
 	}
-	if err := h.service.Update(id, body); err != nil {
+	body.Id = uint(id)
+	if err := h.service.Update(body); err != nil {
 		return err
 	}
 	return ctx.JSON(body)

@@ -24,3 +24,7 @@ func (s Service) GetAll() ([]Meal, error) {
 func (s Service) Delete(id uint) error {
 	return s.repository.Delete(Meal{Id: id})
 }
+
+func (s Service) Update(meal Meal) error {
+	return s.repository.Update(meal)
+}
