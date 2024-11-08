@@ -1,0 +1,23 @@
+services:
+  api:
+    image: golang:alpine
+    build:
+      dockerfile: Dockerfile
+    depends_on:
+      - postgres
+    ports:
+      - '80:80'
+    environment:
+      PG_HOST: postgres
+      PG_USER: ${PG_USER}
+      PG_PASSWORD: ${PG_PASSWORD}
+      PG_PORT: 5432
+
+  postgres:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${PG_USER}
+      POSTGRES_PASSWORD: ${PG_PASSWORD}
+    ports:
+      - '5432:5432'
